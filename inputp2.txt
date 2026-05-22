@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+static short num = 1;
+static short labno; // label numbers
+
+char *gentemp(char *newtemp)
+{ if(newtemp == NULL) {return NULL;}
+  sprintf(newtemp, "%d", num);
+  char *prefix = "t";
+  char *temp;
+  temp = (char*) malloc(strlen(prefix)+strlen(newtemp) +1);
+  strcpy(temp,prefix); strcat(temp,newtemp); strcpy(newtemp,temp);
+  num++; return newtemp;
+}
+
+char* genlabel(char *lab)
+{ if(lab == NULL) {return NULL;}
+  labno;
+  sprintf(lab, "%d", labno);
+  char *lbl;
+  lbl = (char*) malloc(strlen(lab)+2);
+  strcpy(lbl, lab);
+  labno++;
+  return lbl;
+}
+
+char * itos (short num)
+{ short count = 0, digs[10];
+  short copy = num, rem;
+  char* digits[10] ={"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+  char * res;
+  while (copy != 0)
+  { rem = copy % 10; digs[count] = rem;
+    copy = copy / 10;
+    count ++;
+  }
+  res = (char*) malloc(count); res[count] = '\0'; // printf("%s \n", res);
+  for ( int i = count-1; i >= 0; i--) { strcat(res, digits[digs[i]]);}
+  return res;
+}
+
+char * gencode(char* lbl, char* colon, char * lhs, char* asgn, char* opd1, char* opr, char* opd2,
+               char* icode)  
+{if (icode == NULL) {return NULL;}
+ int codelen = strlen(lbl) + 2 + strlen (lhs) + strlen(asgn) + 10 + strlen(opd1) +
+               strlen(opr) + strlen(opd2);
+ char *code = (char*) malloc(codelen); 
+ strcpy(code, lbl); strcat(code, colon); strcat(code, lhs); strcat(code, asgn); strcat(code, opd1); 
+ strcat(code, opr); ;strcat(code, opd2);
+ strcpy(icode, code);
+ return icode;
+}

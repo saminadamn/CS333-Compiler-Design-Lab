@@ -1,0 +1,10 @@
+90: t1 := b + c 
+91: if t1>d goto ___ 
+92: goto  ___
+93: goto  ___ 
+Backpatch : Resolve targets in 92,  With label : 93 
+94: if b!=c goto ___ 
+95: goto ___ 
+Backpatch : Resolve targets in 91,  With the label : 94 
+ Truelist after processing 94, 
+ Falselist after processing 93, 95, 

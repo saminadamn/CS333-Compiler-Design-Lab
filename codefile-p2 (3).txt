@@ -1,0 +1,132 @@
+  #include <stdio.h>
+  #include <string.h>
+  #include <stdlib.h>
+  #include <stdbool.h>
+
+  // working with a linked list : elements of short type 
+
+  struct node 
+  { unsigned short num;
+    struct node * next;
+  };
+  // list of functions
+  bool isempty ( struct node * list )
+  { if ( list == 0 ) return true; else return false; }
+
+  // length(list) - returns the number of elements in list
+  int length ( struct node * list )
+  { struct node * p = list;
+    int count = 0;
+    while ( p != 0 ) { count ++; p = p->next; };
+    return count;
+  }
+
+  bool  find (struct node *list, unsigned short elm )
+  { struct node *p = list;
+    bool found = false;
+    while ( p != 0 )
+    { if (p->num == elm) {found = true; break;};
+      p = p->next;
+    };
+    return (found);
+  }
+
+  void append (struct node ** list, unsigned short elm )
+  { // find the last node of list; empty list is easy to handle
+    struct node * p = (struct node*) malloc(sizeof(struct node));
+     p->num = elm; p->next = 0;
+      if ( isempty(*list)) *list = p;
+      else
+      {  struct node * curr = *list;
+         struct node * prev = *list;
+         while ( curr != 0 )
+         {prev = curr; curr = curr->next;};
+         prev->next = p;
+      };
+      return ;
+  }
+
+  void makelist(struct node ** list, short elm )
+  { struct node *p = (struct node*) malloc (sizeof(struct node));
+    if (elm == -1) {p = 0; *list = p;}
+    else { p->num = elm; p->next = 0; *list = p;}
+    return;
+  }
+
+  void merge ( struct node ** newlist, struct node *list1, struct node *list2) 
+   // newlist <- list1 + list2; 
+  { // complete the body
+    struct node *p = (struct node*) malloc(sizeof(struct node));
+    if (isempty(list1) && !isempty(list2)) 
+      {*newlist = list2;} // if list1 is empty then merged list is list2   
+    else
+    if (!isempty(list1) && isempty(list2)) {*newlist = list1;}
+    else  
+      {*newlist = list1; p = list1;   
+       struct node * curr = p;
+       struct node * prev = p;
+       while ( curr != 0 )
+        {prev = curr; curr = curr->next;};
+       prev->next = list2;
+      };
+    //free(list1); free(list2); 
+    return;
+  }
+
+  // a function to display a linked list
+  void display (FILE* fptr,  struct node * list )
+  { struct node * p = list;
+    if (p == 0) fprintf(fptr, " Empty list \n");
+    else
+    { while (p != 0)
+      {// printf("%hd, ", p->num);
+     fprintf(fptr, "%hd, ", p->num); p = p->next;};
+     // printf("\n"); fprintf(fptr, "\n");
+    // printf(" Last element is %hd \n", p->num);
+    }
+  }
+  void print (struct node * list )
+  { struct node * p = list;
+    if ( p == 0 ) printf("empty \n");
+    else 
+    while (p != 0)
+    {printf("%hd, ", p->num);p = p->next;};
+     //printf("\n"); 
+  }
+/*
+void backpatch(FILE*fptr, struct node* list, int num)
+{ struct node * p = list;
+  printf("%d \n", length(list));
+  printf(" Resolve all unfilled targets in int code in the list \n");
+  fprintf(fptr, " Resolve all unfilled targets in int code in the list \n");
+  // for ( int i = 0 ; i < length(list) ; i++ )
+  // while (p != 0)
+  // {printf(" %s ", (char *)p->name); p = p->next; 
+  //  fprintf(fptr, " %s ", (char *)p->name); p = p->next; 
+  //  };
+  display(list);
+  printf("Using the label %d \n", num);
+  fprintf(fptr, "Using the label %d \n", num);
+}
+
+  int main()
+  { struct node* list1 = 0, *list2 = 0;
+    unsigned short labels[50], n;
+    printf(" exec code starts \n");
+    scanf("%hd", &n);
+    makelist(&list1, n); makelist(&list2, n);
+    while (scanf("%hd", &n) != EOF)
+     {append(&list1, n); append(&list2, n);} 
+    printf(" end of Iteration \n"); 
+   printf(" Display list1 with % d elements after inserting at head \n", length(list1));
+   display(list1);
+   printf(" Display list2 with % d elements after insertion at head \n", length(list2));
+   display(list2);
+   struct node* merglist = 0;
+   merge(&merglist, list1, list2);
+   printf(" Display merglist with % d elements after merging list1 and list 2 \n", 
+       length(merglist));
+   display(merglist);
+  return 0;
+}
+*/
