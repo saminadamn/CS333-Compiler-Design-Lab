@@ -1,10 +1,6 @@
 # CS333-Compiler-Design-Lab
 This repository contains programs and experiments performed as part of the Compiler Design Lab. It includes implementations using Lex and Yacc for lexical analysis, parsing, syntax-directed translation, intermediate code generation, backpatching, and control flow handling.
 
-# Compiler Design Lab
-
-A comprehensive collection of Compiler Design Lab experiments implemented using C, Lex/Flex, and Yacc/Bison. This repository demonstrates the practical implementation of various phases of a compiler including lexical analysis, parsing, syntax-directed translation, semantic handling, intermediate code generation, and control flow management.
-
 ---
 
 # Overview
