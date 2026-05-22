@@ -1,0 +1,98 @@
+
+;; Function main (main, funcdef_no=6, decl_uid=3702, cgraph_uid=7, symbol_order=8)
+
+pointer_query counters:
+  index cache size:   0
+  index entries:      0
+  access cache size:  0
+  access entries:     0
+  hits:               0
+  misses:             0
+  failures:           0
+  max_depth:          0
+int main ()
+{
+  int j;
+  int i;
+  int k;
+  int index2;
+  int index1;
+  int D.3722;
+  int _1;
+  int _2;
+  int _3;
+  int _4;
+  int _5;
+  int _6;
+  int _7;
+  int _8;
+  int _9;
+  int _23;
+
+  <bb 2> :
+  k_16 = 0;
+  goto <bb 10>; [INV]
+
+  <bb 3> :
+  i_24 = 0;
+  goto <bb 8>; [INV]
+
+  <bb 4> :
+  _1 = i_11 * 5;
+  a[i_11] = _1;
+  j_27 = 0;
+  goto <bb 6>; [INV]
+
+  <bb 5> :
+  _2 = j_12 * j_12;
+  b[j_12] = _2;
+  j_31 = j_12 + 1;
+
+  <bb 6> :
+  # j_12 = PHI <j_27(4), j_31(5)>
+  if (j_12 <= 9999)
+    goto <bb 5>; [INV]
+  else
+    goto <bb 7>; [INV]
+
+  <bb 7> :
+  _3 = a[i_11];
+  _4 = b[i_11];
+  _5 = _3 + _4;
+  a[i_11] = _5;
+  i_29 = i_11 + 1;
+
+  <bb 8> :
+  # i_11 = PHI <i_24(3), i_29(7)>
+  if (i_11 <= 9999)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 9>; [INV]
+
+  <bb 9> :
+  k_25 = k_10 + 1;
+
+  <bb 10> :
+  # k_10 = PHI <k_16(2), k_25(9)>
+  if (k_10 <= 99)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 11>; [INV]
+
+  <bb 11> :
+  _6 = rand ();
+  index1_19 = _6 % 10000;
+  _7 = rand ();
+  index2_21 = _7 % 10000;
+  _8 = b[index2_21];
+  _9 = a[index1_19];
+  printf (" %d %d %d %d \n", index1_19, _9, index2_21, _8);
+  _23 = 0;
+
+  <bb 12> :
+<L9>:
+  return _23;
+
+}
+
+

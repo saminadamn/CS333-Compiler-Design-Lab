@@ -1,0 +1,350 @@
+CS 334 – Compiler Design Laboratory
+Samina Parveen, BTECH/10007/23
+
+Lab Assignment 3: To Analyse the lex script and identification of changing of order and its impact on tokens present
+
+1.1 There was no output as {} for every token was left empty. 
+
+1.2 Since the code has ordering in the {octalnumber} {decimal} format with printf statements respectively, we get the octal numbers identified as it is starting from 0.
+OCTAL NUMBER: 00
+DELIMITER: ,
+DECIMAL NUMBER: 100
+DELIMITER: ;
+DECIMAL NUMBER: 0779
+DELIMITER: ,
+DECIMAL NUMBER: 99990000
+DELIMITER: ,
+OCTAL NUMBER: 01234
+DELIMITER: ;
+DECIMAL NUMBER: 0
+DELIMITER: ,
+OCTAL NUMBER: 01
+
+1.3 When we change the order of the {number} {decimal} we get the octal numbers identified as decimal numbers as per the convention of C we are supposed to define the more specific rule first then the more generic one while forming a compiler.
+DECIMAL NUMBER: 00
+DELIMITER: ,
+DECIMAL NUMBER: 100
+DELIMITER: ;
+DECIMAL NUMBER: 0779
+DELIMITER: ,
+DECIMAL NUMBER: 99990000
+DELIMITER: ,
+DECIMAL NUMBER: 01234
+DELIMITER: ;
+DECIMAL NUMBER: 0
+DELIMITER: ,
+DECIMAL NUMBER: 01
+------------------------------------------------------------------------------------------------------------------------
+
+2. DECIMAL NUMBER : 200
+DELIMITER : ,
+REAL NUMBER : 1.2
+DELIMITER : ;
+DECIMAL NUMBER : 2
+DELIMITER : ;
+DECIMAL NUMBER : 15
+DELIMITER : ,
+REAL NUMBER WITH EXPONENT : 12e+1
+DELIMITER : ;
+REAL NUMBER : 2.5E-23
+DELIMITER : ;
+DECIMAL NUMBER : 5
+DECIMAL NUMBER : 5
+DELIMITER : ;
+DECIMAL NUMBER : 100
+DELIMITER : ;
+BITSTRING : 0B10101010
+DELIMITER : ;
+OCTAL NUMBER : 077775
+HEXADECIMAL NUMBER : 0xaaaeFF23
+DELIMITER : ,
+HEXADECIMAL NUMBER : 0XAAA000
+DELIMITER : ,
+BITSTRING : 0b1000000
+DELIMITER : ;
+CHARACTER LITERAL : 'a'
+DELIMITER : ,
+CHARACTER LITERAL : '~'
+DELIMITER : ,
+CHARACTER LITERAL : '$'
+DELIMITER : ;
+CHARACTER LITERAL : '^'
+DELIMITER : ;
+CHARACTER LITERAL : '&'
+The lex specifications was extended to the multiple numeric formats and character literals so this correct rule and order ensured that the detected and ensured the accurate token is printed in the given file while scanner is used.
+-----------------------------------------------------------------------------------------------------------------------
+
+3.
+btech1000723@babbage:~/Lab3$ ./scanner1 < sampleprog.c
+#IDENTIFIER : include
+<IDENTIFIER : stdio
+.IDENTIFIER : h
+>KEYWORD : int
+IDENTIFIER : main
+DELIMITER : (
+DELIMITER : )
+DELIMITER : {
+SINGLE LINE COMMENT
+KEYWORD : int
+IDENTIFIER : i
+OPERATOR : =
+NUMBER : 100
+;IDENTIFIER : long
+IDENTIFIER : sum
+OPERATOR : =
+NUMBER : 1234567890123
+;KEYWORD : char
+IDENTIFIER : ch1
+OPERATOR : =
+'IDENTIFIER : a
+'DELIMITER : ,
+IDENTIFIER : ch2
+OPERATOR : =
+'$';SINGLE LINE COMMENT
+KEYWORD : char
+IDENTIFIER : str
+[NUMBER : 40
+]OPERATOR : =
+STRING LITERAL : "Lexical Analysis"
+;IDENTIFIER : sum
+OPERATOR : =
+IDENTIFIER : i
+OPERATOR : +
+NUMBER : 02345175
+OPERATOR : +
+NUMBER : 0
+IDENTIFIER : xabcdef
+;KEYWORD : for
+DELIMITER : (
+KEYWORD : int
+IDENTIFIER : j
+OPERATOR : =
+NUMBER : 0
+;IDENTIFIER : j
+<NUMBER : 25
+;IDENTIFIER : j
+OPERATOR : +
+OPERATOR : +
+DELIMITER : )
+DELIMITER : {
+IDENTIFIER : sum
+OPERATOR : =
+IDENTIFIER : i
+OPERATOR : +
+IDENTIFIER : j
+OPERATOR : +
+NUMBER : 012
+OPERATOR : +
+NUMBER : 0
+IDENTIFIER : X10
+;KEYWORD : if
+DELIMITER : (
+IDENTIFIER : j
+%NUMBER : 5
+OPERATOR : ==
+NUMBER : 0
+DELIMITER : )
+IDENTIFIER : printf
+DELIMITER : (
+STRING LITERAL : " sum = %ld \n"
+DELIMITER : ,
+IDENTIFIER : sum
+DELIMITER : )
+;DELIMITER : }
+KEYWORD : return
+NUMBER : 0
+;DELIMITER : }
+
+
+
+
+
+btech1000723@babbage:~/Lab3$ diff sampleout.txt <(./scanner1 <sampleprog.c)
+1,104c1,78
+<  pre-processor directive ignored : #include <stdio.h>
+<  (Token, Lexeme) = (KEYWORD, int)
+<  (Token, Lexeme) = (IDENTIFIER, main)
+<  (Token, Lexeme) = (LEFTPAR, '(')
+<  (Token, Lexeme) = (RIGHTPAR, ')')
+<  (Token, Lexeme) = (LEFTPAR, '{')
+<  Single Line Comment = "// sample C program for testing lexical analyser"
+<  (Token, Lexeme) = (KEYWORD, int)
+<  (Token, Lexeme) = (IDENTIFIER, i)
+<  (Token, Lexeme) = (ASSIGN-OP, '=')
+<  (Token, Lexeme) = (DECIMAL NUMBER, 100)
+<  (Token, Lexeme) = (DELIMITER, ';')
+<  (Token, Lexeme) = (KEYWORD, long)
+<  (Token, Lexeme) = (IDENTIFIER, sum)
+<  (Token, Lexeme) = (ASSIGN-OP, '=')
+<  (Token, Lexeme) = (DECIMAL NUMBER, 1234567890123)
+<  (Token, Lexeme) = (DELIMITER, ';')
+<  (Token, Lexeme) = (KEYWORD, char)
+<  (Token, Lexeme) = (IDENTIFIER, ch1)
+<  (Token, Lexeme) = (ASSIGN-OP, '=')
+<  (Token, Lexeme) = (CHAR LITERAL, 'a')
+<  (Token, Lexeme) = (DELIMITER, ',')
+<  (Token, Lexeme) = (IDENTIFIER, ch2)
+<  (Token, Lexeme) = (ASSIGN-OP, '=')
+<  (Token, Lexeme) = (CHAR LITERAL, '$')
+<  (Token, Lexeme) = (DELIMITER, ';')
+<  Single Line Comment = "// inline declaration"
+<  (Token, Lexeme) = (KEYWORD, char)
+<  (Token, Lexeme) = (IDENTIFIER, str)
+<  (Token, Lexeme) = (LEFTPAR, '[')
+<  (Token, Lexeme) = (DECIMAL NUMBER, 40)
+<  (Token, Lexeme) = (RIGHTPAR, ']')
+<  (Token, Lexeme) = (ASSIGN-OP, '=')
+<  (Token, Lexeme) = (STRING, ""Lexical Analysis""
+<  (Token, Lexeme) = (DELIMITER, ';')
+<  (Token, Lexeme) = (IDENTIFIER, sum)
+<  (Token, Lexeme) = (ASSIGN-OP, '=')
+<  (Token, Lexeme) = (IDENTIFIER, i)
+<  (Token, Lexeme) = (ARITH-OP, '+')
+<  (Token, Lexeme) = (OCTAL NUMBER, 02345175)
+<  (Token, Lexeme) = (ARITH-OP, '+')
+<  (Token, Lexeme) = (HEXA NUMBER, 0xabcdef)
+<  (Token, Lexeme) = (DELIMITER, ';')
+<  (Token, Lexeme) = (IDENTIFIER, for)
+<  (Token, Lexeme) = (LEFTPAR, '(')
+<  (Token, Lexeme) = (KEYWORD, int)
+<  (Token, Lexeme) = (IDENTIFIER, j)
+<  (Token, Lexeme) = (ASSIGN-OP, '=')
+<  (Token, Lexeme) = (DECIMAL NUMBER, 0)
+<  (Token, Lexeme) = (DELIMITER, ';')
+<  (Token, Lexeme) = (IDENTIFIER, j)
+<  (Token, Lexeme) = (RELOP, '<')
+<  (Token, Lexeme) = (DECIMAL NUMBER, 25)
+<  (Token, Lexeme) = (DELIMITER, ';')
+<  (Token, Lexeme) = (IDENTIFIER, j)
+<  (Token, Lexeme) = (ARITH-OP, '+')
+<  (Token, Lexeme) = (ARITH-OP, '+')
+<  (Token, Lexeme) = (RIGHTPAR, ')')
+<  (Token, Lexeme) = (LEFTPAR, '{')
+<  (Token, Lexeme) = (IDENTIFIER, sum)
+<  (Token, Lexeme) = (ASSIGN-OP, '=')
+<  (Token, Lexeme) = (IDENTIFIER, i)
+<  (Token, Lexeme) = (ARITH-OP, '+')
+<  (Token, Lexeme) = (IDENTIFIER, j)
+<  (Token, Lexeme) = (ARITH-OP, '+')
+<  (Token, Lexeme) = (OCTAL NUMBER, 012)
+<  (Token, Lexeme) = (ARITH-OP, '+')
+<  (Token, Lexeme) = (HEXA NUMBER, 0X10)
+<  (Token, Lexeme) = (DELIMITER, ';')
+<  (Token, Lexeme) = (KEYWORD, if)
+<  (Token, Lexeme) = (LEFTPAR, '(')
+<  (Token, Lexeme) = (IDENTIFIER, j)
+<  (Token, Lexeme) = (ARITH-OP, '%')
+<  (Token, Lexeme) = (DECIMAL NUMBER, 5)
+<  (Token, Lexeme) = (RELOP, '==')
+<  (Token, Lexeme) = (DECIMAL NUMBER, 0)
+<  (Token, Lexeme) = (RIGHTPAR, ')')
+<  (Token, Lexeme) = (IDENTIFIER, printf)
+<  (Token, Lexeme) = (LEFTPAR, '(')
+<  (Token, Lexeme) = (STRING, "" sum = %ld \n""
+<  (Token, Lexeme) = (DELIMITER, ',')
+<  (Token, Lexeme) = (IDENTIFIER, sum)
+<  (Token, Lexeme) = (RIGHTPAR, ')')
+<  (Token, Lexeme) = (DELIMITER, ';')
+<  (Token, Lexeme) = (RIGHTPAR, '}')
+<  (Token, Lexeme) = (KEYWORD, return)
+<  (Token, Lexeme) = (DECIMAL NUMBER, 0)
+<  (Token, Lexeme) = (DELIMITER, ';')
+<  (Token, Lexeme) = (RIGHTPAR, '}')
+<
+<  Display Statistics of Tokens in Input
+<
+<  Number of Keywords : 8
+<  Number of Identifiers : 18
+<  Number of Integers : 8
+<  Number of Assign Operators : 8
+<  Number of Arithmetic Operators : 8
+<  Number of Relational Operators : 2
+<  Number of Left Parentheses : 7
+<  Number of Right Parentheses : 7
+<  Number of Delimiters : 12
+<  Number of Single Line Comments : 2
+<  Number of Character Literals: 2
+<  Number of String Literals: 2
+---
+> #IDENTIFIER : include
+> <IDENTIFIER : stdio
+> .IDENTIFIER : h
+> >KEYWORD : int
+> IDENTIFIER : main
+> DELIMITER : (
+> DELIMITER : )
+> DELIMITER : {
+> SINGLE LINE COMMENT
+> KEYWORD : int
+> IDENTIFIER : i
+> OPERATOR : =
+> NUMBER : 100
+> ;IDENTIFIER : long
+> IDENTIFIER : sum
+> OPERATOR : =
+> NUMBER : 1234567890123
+> ;KEYWORD : char
+> IDENTIFIER : ch1
+> OPERATOR : =
+> 'IDENTIFIER : a
+> 'DELIMITER : ,
+> IDENTIFIER : ch2
+> OPERATOR : =
+> '$';SINGLE LINE COMMENT
+> KEYWORD : char
+> IDENTIFIER : str
+> [NUMBER : 40
+> ]OPERATOR : =
+> STRING LITERAL : "Lexical Analysis"
+> ;IDENTIFIER : sum
+> OPERATOR : =
+> IDENTIFIER : i
+> OPERATOR : +
+> NUMBER : 02345175
+> OPERATOR : +
+> NUMBER : 0
+> IDENTIFIER : xabcdef
+> ;KEYWORD : for
+> DELIMITER : (
+> KEYWORD : int
+> IDENTIFIER : j
+> OPERATOR : =
+> NUMBER : 0
+> ;IDENTIFIER : j
+> <NUMBER : 25
+> ;IDENTIFIER : j
+> OPERATOR : +
+> OPERATOR : +
+> DELIMITER : )
+> DELIMITER : {
+> IDENTIFIER : sum
+> OPERATOR : =
+> IDENTIFIER : i
+> OPERATOR : +
+> IDENTIFIER : j
+> OPERATOR : +
+> NUMBER : 012
+> OPERATOR : +
+> NUMBER : 0
+> IDENTIFIER : X10
+> ;KEYWORD : if
+> DELIMITER : (
+> IDENTIFIER : j
+> %NUMBER : 5
+> OPERATOR : ==
+> NUMBER : 0
+> DELIMITER : )
+> IDENTIFIER : printf
+> DELIMITER : (
+> STRING LITERAL : " sum = %ld \n"
+> DELIMITER : ,
+> IDENTIFIER : sum
+> DELIMITER : )
+> ;DELIMITER : }
+> KEYWORD : return
+> NUMBER : 0
+> ;DELIMITER : }
+
+
+The lex specification correctly recognizes all keywords used in sampleprog.c and identifiers and distinguished from keywords and single line comments are beginning with // are detected correctly and string literals are enclosed in "" marks and operators, numbers and delimiters are correctly identified. white spaces are ignored during lexical analysis and the output produced by sampleprog.c matches the sampleout.txt and the errors reported during compilation were because of spaces of the lex file.
+

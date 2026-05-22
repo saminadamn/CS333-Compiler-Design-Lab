@@ -1,0 +1,43 @@
+CS 335 Compiler Design Lab 1
+Lab Assignment 1:
+Objective: Understanding the working of GCC and experimentation with multiple aspects of code optimization and complilation types and methods. 
+
+Name: Samina Parveen
+Roll Number: BTECH/10007/23
+Date: 20-1-2026
+
+Problem 1(a): Complilation using gcc -v
+Commands used 
+gcc -v testprog.c 2> gcc-output -o 
+where 2> gives errors and 1> produces output and > indicated file redirection 
+Version of gcc used is 13.3.0
+No of the executables were 10 exe and the names were cc1, as, collect2. Identifying the cousin compliers of C it gave cc1 as and collect2.
+
+1(b): The time of the program initially was 
+9383 88087604 886784996
+real 1ms3.3449s
+user 0m49.9011s
+system 0m0.039s
+
+the error channel has its own output for instance for time its output goes into 2> and for the prog it uses 1> for the output so to avoid confusion we use time(./proh1>out) 2>time this helps us differencitate.
+
+1(c): Commands used are -O and the name of file was changed to optimized code and s file of it on comparing the lines by wl -l and checking both unoptimized and optimized files the output was 169 lines and 185 lines. The time taken was reduced significantly to around
+9383 88087604 886784996
+real 0ms4.0203s
+user 0ms5.0239s
+system 0m0.028s
+
+Using -fverbose we have gotten a text thats very understanble and has annotation for each line. 
+
+2. Intermediate Complier Dump 
+gcc -fdump-tree-all testprog.c
+It uses a 3 address code and simplifies the flow control and expressions in multiple intermediate files. After the 343th pass the dump file is shown. 
+
+4. Compilation with Optimization (-O2) 
+gcc -O2 testprog.c testopt
+Optimization version executes faster than unoptimized version. 
+
+4. Annoted Assemblyt code
+fverbose gives annotation
+
+

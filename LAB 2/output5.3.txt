@@ -1,0 +1,16 @@
+Token 1 : bbc lexeme : 1
+Token 1 : c lexeme : 2
+Character ; not recognized
+Token 2 : b lexeme : 3
+Character a not recognized
+Character $ not recognized
+Character x not recognized
+Character y not recognized
+Character z not recognized
+Token 1 : c lexeme : 4
+Token 2 : ab lexeme : 5
+Token 1 : c lexeme : 6
+Character # not recognized
+Total Lexemes found : 6
+Token 1 count = 4
+Token 2 count = 2

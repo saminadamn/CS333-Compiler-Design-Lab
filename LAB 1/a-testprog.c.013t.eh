@@ -1,0 +1,57 @@
+
+;; Function main (main, funcdef_no=6, decl_uid=3702, cgraph_uid=7, symbol_order=8)
+
+int main ()
+{
+  int j;
+  int i;
+  int k;
+  int index2;
+  int index1;
+  int D.3722;
+
+  k = 0;
+  goto <D.3720>;
+  <D.3719>:
+  i = 0;
+  goto <D.3718>;
+  <D.3717>:
+  _1 = i * 5;
+  a[i] = _1;
+  j = 0;
+  goto <D.3716>;
+  <D.3715>:
+  _2 = j * j;
+  b[j] = _2;
+  j = j + 1;
+  <D.3716>:
+  if (j <= 9999) goto <D.3715>; else goto <D.3713>;
+  <D.3713>:
+  _3 = a[i];
+  _4 = b[i];
+  _5 = _3 + _4;
+  a[i] = _5;
+  i = i + 1;
+  <D.3718>:
+  if (i <= 9999) goto <D.3717>; else goto <D.3711>;
+  <D.3711>:
+  k = k + 1;
+  <D.3720>:
+  if (k <= 99) goto <D.3719>; else goto <D.3709>;
+  <D.3709>:
+  _6 = rand ();
+  index1 = _6 % 10000;
+  _7 = rand ();
+  index2 = _7 % 10000;
+  _8 = b[index2];
+  _9 = a[index1];
+  printf (" %d %d %d %d \n", index1, _9, index2, _8);
+  D.3722 = 0;
+  goto <D.3723>;
+  D.3722 = 0;
+  goto <D.3723>;
+  <D.3723>:
+  return D.3722;
+}
+
+

@@ -1,0 +1,34 @@
+P2. Using lexer1 I have generated a scanner and as it is successful compliation it stops after the first successful match. It is because the main function on lexer calls yylex() only once. Yylex() is a lex tool used for function that is predefined. In the lex regex1.l it generates the DFA in a file in the form of arrays. The generated C file was compiled using GCC to create an executable scanner. It was run on input files using input redirection and stored in output files. It is then compiled to one file called outputp2.txt where all the files with inputs are identified. 
+
+1. Given the string "bbccbacabc" we have identified Token 1 for substring "bbcc". We have found Token 2 for substring "b". The a is trapped so we display it in the next line. Followed by substring "c" giving Token 1 found. We have substring "ab" followed by Token 2 found. Then we have "c" as token identified. 
+
+Token 1 found 
+Token 2 found 
+aToken 1 found 
+Token 2 found 
+Token 1 found 
+
+2. Given the string "bbc  c ba cabc". we have identified Token 1 for substring "bbc" followed by the space we have gotten for the white spaces. Followed by "c" which gives Token 2. We further recieve "b" for which we get Token 2 found and followed by discarded or trap provided by "a". We have "c" following recognizing Token 1 and followed by "ab" giving Token 1 and "c" giving Token 1. 
+Token 1 found 
+     Token 1 found 
+
+
+Token 2 found 
+a
+
+Token 1 found 
+Token 2 found 
+Token 1 found 
+
+3. Given the string we get "bbc   c   : ba $ xyz cabc#" as Token 1 found "bbc" followed by the space we have gotten for the white spaces. We have space for next line identified. We further get x y z as non identified tokens then we have substring "c" that gives Token 1 found followed by "ab" Token 2 found and c giving Token 1 found. 
+Token 1 found 
+     Token 1 found 
+
+
+; Token 2 found 
+a  $
+
+ x y z Token 1 found 
+Token 2 found 
+Token 1 found 
+ #

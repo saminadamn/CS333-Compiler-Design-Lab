@@ -1,0 +1,159 @@
+CS 334 – Compiler Design Laboratory
+
+Lab Assignment 2: Lexical Analyzer Using LEX
+
+
+---
+
+Objective
+
+To understand the working of LEX (Lexical Analyzer Generator) by writing regular expressions for tokens, generating scanners, experimenting with different inputs, and modifying lex scripts to control token recognition, lexeme reporting, and counting.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+In this laboratory assignment, we studied the use of LEX, a lexical analyzer generator, to understand how tokens are recognized using regular expressions. The objective was to gain hands-on experience in writing lex scripts, generating scanners, and analyzing their behavior on different input strings. Initially, tokens were defined over the alphabet {a, b, c}, where Token 1 corresponds to the regular expression b*c+ and Token 2 corresponds to a*b. Using these definitions, we analyzed how a DFA recognizes valid substrings from the input using the longest match rule. In P2, a scanner was generated using the given regex1.l script. The lex script was processed using the lex command to generate lex.yy.c, which was then compiled using GCC. When the scanner was executed on different input files, it was observed that only the first valid token was recognized.
+
+
+
+
+P1. Done in notebook.
+P2. Using lexer1 I have generated a scanner and as it is successful compliation it stops after the first successful match. It is because the main function on lexer calls yylex() only once. Yylex() is a lex tool used for function that is predefined. In the lex regex1.l it generates the DFA in a file in the form of arrays. The generated C file was compiled using GCC to create an executable scanner. It was run on input files using input redirection and stored in output files. It is then compiled to one file called outputp2.txt where all the files with inputs are identified. 
+
+1. Given the string "bbccbacabc" we have identified Token 1 for substring "bbcc". We have found Token 2 for substring "b". The a is trapped so we display it in the next line. Followed by substring "c" giving Token 1 found. We have substring "ab" followed by Token 2 found. Then we have "c" as token identified. 
+
+Token 1 found 
+Token 2 found 
+aToken 1 found 
+Token 2 found 
+Token 1 found 
+
+2. Given the string "bbc  c ba cabc". we have identified Token 1 for substring "bbc" followed by the space we have gotten for the white spaces. Followed by "c" which gives Token 2. We further recieve "b" for which we get Token 2 found and followed by discarded or trap provided by "a". We have "c" following recognizing Token 1 and followed by "ab" giving Token 1 and "c" giving Token 1. 
+Token 1 found 
+     Token 1 found 
+
+
+Token 2 found 
+a
+
+Token 1 found 
+Token 2 found 
+Token 1 found 
+
+3. Given the string we get "bbc   c   : ba $ xyz cabc#" as Token 1 found "bbc" followed by the space we have gotten for the white spaces. We have space for next line identified. We further get x y z as non identified tokens then we have substring "c" that gives Token 1 found followed by "ab" Token 2 found and c giving Token 1 found. 
+Token 1 found 
+     Token 1 found 
+
+
+; Token 2 found 
+a  $
+
+ x y z Token 1 found 
+Token 2 found 
+Token 1 found 
+ #
+1.
+Token 1 found 
+Token 2 found 
+aToken 1 found 
+Token 2 found 
+Token 1 found 
+
+
+
+P3.................................
+
+2. 
+Token 1 found 
+     Token 1 found 
+
+
+Token 2 found 
+a
+
+Token 1 found 
+Token 2 found 
+Token 1 found 
+
+3.
+
+Token 1 found 
+     Token 1 found 
+
+
+; Token 2 found 
+a  $
+
+ x y z Token 1 found 
+Token 2 found 
+Token 1 found 
+ #
+
+
+
+P4...............................................................
+Token 1 found 
+Token 1 found 
+Token 1 found 
+Token 1: lexeme : bbcc
+Token 2: lexeme : b
+Character a is not recognized
+Token 1: lexeme : c
+Token 2: lexeme : ab
+Token 1: lexeme : c
+
+Token 1: lexeme : bbc
+Token 1: lexeme : c
+
+
+Token 2: lexeme : b
+Character a is not recognized
+
+
+Token 1: lexeme : c
+Token 2: lexeme : ab
+Token 1: lexeme : c
+
+Token 1: lexeme : bbc
+Token 1: lexeme : c
+Token 2: lexeme : b
+Character a is not recognized
+
+
+Character x is not recognized
+Character y is not recognized
+Character z is not recognized
+Token 1: lexeme : c
+Token 2: lexeme : ab
+Token 1: lexeme : c
+
+
+P5.........................................................
+
+Token 1 : bbc lexeme : 1
+Token 1 : c lexeme : 2
+Token 2 : b lexeme : 3
+Character a not recognized
+Token 1 : c lexeme : 4
+Token 2 : ab lexeme : 5
+Token 1 : c lexeme : 6
+Total Lexemes found : 6
+
+Token 1 count = 4
+Token 2 count = 2
+Token 1 : bbc lexeme : 1
+Token 1 : c lexeme : 2
+Character ; not recognized
+Token 2 : b lexeme : 3
+Character a not recognized
+Character $ not recognized
+Character x not recognized
+Character y not recognized
+Character z not recognized
+Token 1 : c lexeme : 4
+Token 2 : ab lexeme : 5
+Token 1 : c lexeme : 6
+Character # not recognized
+Total Lexemes found : 6
+
+Token 1 count = 4
+Token 3 count = 2
