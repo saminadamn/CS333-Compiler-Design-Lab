@@ -1,0 +1,17 @@
+Rule 4 used : SEEN int 
+Rule 7 used :seen First Identifier 
+Rule 3 used : Declaration No. 1 
+Rule 5 used : SEEN float 
+Rule 7 used :seen First Identifier 
+Rule 6 used: Seen another Identifier 
+Rule 3 used : Declaration No. 2 
+Rule 4 used : SEEN int 
+Rule 7 used :seen First Identifier 
+Rule 6 used: Seen another Identifier 
+Rule 3 used : Declaration No. 3 
+Rule 2 used 
+Rule 1 used : Successful Parse
+Rule 1 used : Successful Parse
+Rule 1 used : Successful Parse
+ Number of declaration statements : 3 
+ Parser accepts input : input is in L(G) 

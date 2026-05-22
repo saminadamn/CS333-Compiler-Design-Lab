@@ -1,0 +1,5 @@
+Rule 2 used : SEEN INT 
+Rule 4 used :seen First Identifier 
+Rule 3 used: Seen another Identifier 
+Rule 3 used: Seen another Identifier 
+Rule 1 used : Successful Parse 

@@ -1,0 +1,12 @@
+Identifier : a type : int width : 4 bytes 
+Identifier : b type : int width : 4 bytes 
+ 1 declaration statement seen 
+Identifier : x type : float width : 4 bytes 
+Identifier : y type : float width : 4 bytes 
+ 2  declaration statements seen 
+Identifier : a1 type : int width : 4 bytes 
+Identifier : b1 type : int width : 4 bytes 
+Identifier : c1 type : int width : 4 bytes 
+Identifier : d1 type : int width : 4 bytes 
+ 3  declaration statements seen 
+ End of Declarations : number of statements =  3 

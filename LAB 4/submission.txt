@@ -1,0 +1,199 @@
+CS 334 : COMPILER DESIGN LABORATORY
+Experiment 4 : CFG & Parser Generation using LEX and YACC
+
+Name: Samina Parveen
+Course: B.Tech CSE
+Semester: VI
+Lab: Compiler Design Laboratory
+Date: 10-02-2026 
+---
+
+AIM
+
+To generate a lexical analyzer (scanner) and a syntax analyzer (parser) using the tools LEX and YACC and to study their behavior on declaration statements.
+
+---
+
+P1 
+In this version:
+
+- "i" represents int
+- "f" represents float
+- "a, b" represent identifiers
+
+Example:
+
+i a , b ;
+
+represents:
+
+int a,b;
+
+Commands Used
+
+lex declv1.l
+yacc -d declv1.y
+gcc lex.yy.c y.tab.c -o decl1
+./decl1 < v1inp1.txt > v1out1.txt
+./decl1 < v1inp2.txt > v1out2.txt
+./decl1 < v1inp3.txt > v1out3.txt
+
+---
+
+Observations (P1)
+
+Case 1: v1inp1.txt
+
+Input:
+
+i a , b ;
+
+Output:
+Rule 2 used : seen int
+Rule 6 used : seen Identifier a
+Rule 5 used : Seen First Identifier
+Rule 7 used : seen Identifier b
+Rule 4 used : Seen 1 more Identifier
+Rule 1 used : Successful Parse
+---
+
+Case 2: v1inp2.txt
+
+Input:
+
+i a , ;
+
+Output:
+Syntax Error near ';'
+
+Rule 2 used : seen int
+Rule 6 used : seen Identifier a
+Rule 5 used : Seen First Identifier
+ syntax error near symbol ;
+---
+
+Case 3: v1inp3.txt
+
+Input:
+
+i a b ;
+
+Output:
+Syntax Error near 'b'
+
+Rule 2 used : seen int
+Rule 6 used : seen Identifier a
+Rule 5 used : Seen First Identifier
+ syntax error near symbol b
+
+---
+
+P2 
+In this version actual C-like declarations are used:
+
+int a,b;
+
+Commands
+
+lex declv2.l
+yacc -d declv2.y
+gcc lex.yy.c y.tab.c -o decl2
+cat y.tab.h
+./decl2 < v2inp1.txt > v2out1.txt
+./decl2 < v2inp2.txt > v2out2.txt
+./decl2 < v2inp3.txt > v2out3.txt
+
+Observation of y.tab.h
+
+The file "y.tab.h" contains token definitions such as:
+
+#define INT 257
+#define ID 258
+
+Explanation:
+This file is included in the lex program so that both scanner and parser use the same token numbers.
+
+---
+
+Observations (P2)
+Rule 2 used : SEEN INT
+Rule 4 used :seen First Identifier
+Rule 3 used: Seen another Identifier
+Rule 3 used: Seen another Identifier
+Rule 1 used : Successful Parse
+
+
+
+Rule 2 used : SEEN INT
+Rule 4 used :seen First Identifier
+ syntax error  near symbol ,
+
+
+Rule 2 used : SEEN INT
+Rule 4 used :seen First Identifier
+ syntax error  near symbol
+
+
+1. Valid declaration → parser accepts input.
+2. Multiple identifiers → recursive rule "list → list , ID" is applied.
+3. Incorrect declaration → parser reports syntax error.
+
+---
+P3 
+
+The scripts were modified to print interpreted declarations instead of rule numbers.
+The parser now prints each variable along with its type.
+
+Example output:
+
+a : int
+b : int
+
+Observation:
+Grammar rules remain same but action code in YACC was modified to store identifiers and print them after successful parsing.
+btech1000723@babbage:~/Lab4$ ./decl6 <v3inp1.txt
+Seen INT
+Seen first identifier
+Seen another identifier
+Invalid character
+Seen another identifier
+Successful Parse
+btech1000723@babbage:~/Lab4$ ./decl6 <v3inp2.txt
+Seen FLOAT
+Seen first identifier
+Successful Parse
+btech1000723@babbage:~/Lab4$ ./decl6 <v3inp3.txt
+Seen INT
+Seen first identifier
+Syntax Error
+---
+
+P4
+
+The grammar was extended to handle multiple statements.
+
+Modified start symbol:
+
+S → S decl
+S → decl
+
+Now input like:
+
+int a;
+int b,c;
+int d;
+
+is successfully parsed.
+
+btech1000723@babbage:~/Lab4$ cat v4inp2.txt
+int x1;
+float x2,
+int z1, zsum;
+btech1000723@babbage:~/Lab4$ ./decl9 <v4inp2.txt
+x1 : int
+Syntax Error
+btech1000723@babbage:~/Lab4$ ./decl9 <v4inp3.txt
+Syntax Error
+btech1000723@babbage:~/Lab4$ ./decl9 <v4inp2.txt
+---
+

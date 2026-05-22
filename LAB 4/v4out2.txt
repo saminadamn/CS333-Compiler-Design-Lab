@@ -1,0 +1,8 @@
+Rule 4 used : SEEN int 
+Rule 7 used :seen First Identifier 
+Rule 3 used : Declaration No. 1 
+Rule 5 used : SEEN float 
+Rule 7 used :seen First Identifier 
+ syntax error  near symbol  
+ Number of declaration statements : 1 
+ Parser does not accept input : input is not in L(G) 

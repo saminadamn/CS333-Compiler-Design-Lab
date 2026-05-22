@@ -1,0 +1,6 @@
+Rule 2 used : seen int
+Rule 6 used : seen Identifier a
+Rule 5 used : Seen First Identifier 
+Rule 7 used : seen Identifier b
+Rule 4 used : Seen 1 more Identifier 
+Rule 1 used : Successful Parse 

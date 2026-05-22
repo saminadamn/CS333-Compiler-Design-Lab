@@ -1,0 +1,78 @@
+LAB 7 ASSIGNMENT- CD LAB
+SAMINA PARVEEN
+BTECH/10007/23
+
+P1. btech1000723@babbage:~/Lab7$ ./decl<declinp1.txt
+Identifier : a type : int width : 4 bytes
+Identifier : b type : int width : 4 bytes
+ 1 declaration statement seen
+Identifier : x type : float width : 4 bytes
+Identifier : y type : float width : 4 bytes
+ 2 declaration statement seen
+Identifier : a1 type : int width : 4 bytes
+Identifier : b1 type : int width : 4 bytes
+Identifier : c1 type : int width : 4 bytes
+Identifier : d1 type : int width : 4 bytes
+ 3 declaration statement seen
+ End of Declarations : number of statements =  3
+(END)
+This is input of file 1- without any errors
+int a, b;
+float x, y;
+int a1, b1, c1, d1;
+
+Now, for the file with input with any errors is having 
+1. multiple or redeclaration
+2. type conflict 
+
+btech1000723@babbage:~/Lab7$ ./decl<declinp2.txt
+Identifier : a type : int width : 4 bytes
+Identifier : b type : int width : 4 bytes
+Identifier : a type : int width : 4 bytes
+ 1 declaration statement seen
+ syntax error  line number : 2 near symbol
+ End of Declarations : number of statements =  1
+(END)
+
+By making changes to the text and yacc file to incorporate ' ,'  sign we have this output. 
+As we can notice that here we dont have recognization of redeclared variables then it causes error. 
+
+P2.
+btech1000723@babbage:~/Lab7$ ./symtab idlist.txt
+ Duplicate Error : Input Symbol b exists at index 3 with name : b
+ Duplicate Error : Input Symbol x1 exists at index 6 with name : x1
+ Total no. of entries 9 lastindex 8
+ Display Contents of Symbol Table
+ Index [0]  Global
+ Index [1]  sum
+ Index [2]  a
+ Index [3]  b
+ Index [4]  count
+ Index [5]  count1
+ Index [6]  x1
+ Index [7]  x2
+ Index [8]  y1
+
+This uses hashtable for identification of redeclaration and type conflicts (if any may occur)
+
+
+P3. I have done changes in the symtab-basic-functions.c file where I have fully changed the fil to incorporate Data Structures for Name, Type, Size and Offset. I have also added the count of sum and the total number of entries that are added. Lexer is almost the same. And the Yacc file is changed to incorporate the file in its header. Then for the same input parser is generated with which it identifies error at the given posiiton and conflicts of data types, if they occur (such as repeated declaration of the ch as float and previously as character. 
+
+btech1000723@babbage:~/Lab7$ vi input.txt
+btech1000723@babbage:~/Lab7$ vi symtab-basic-functions.c
+btech1000723@babbage:~/Lab7$ lex declbasic1.l
+btech1000723@babbage:~/Lab7$ yacc -d declbasic1.y
+btech1000723@babbage:~/Lab7$ gcc y.tab.c lex.yy.c -o decl1
+btech1000723@babbage:~/Lab7$ ./decl1< input.txt
+Enter declarations (Ctrl+D to end input):
+Error: redeclaration of 'a' at index [1]
+Error: conflicting types for 'ch1' as 'float'
+previous declaration of 'ch1' with type 'char' at index [3]
+
+Index[0] GST - Total size 13, Entries 4
+Index [1]  a           int     4   0
+Index [2]  b           int     4   4
+Index [3]  ch1         char    1   8
+Index [4]  fl1         float   4   9
+
+P4. I have done the changes in symtab-basics.c where I have added the normal errors to be identified such as redeclaration.  

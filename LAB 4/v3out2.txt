@@ -1,0 +1,4 @@
+Rule 3 used : SEEN float 
+Rule 5 used :seen First Identifier 
+Rule 1 used : Successful Parse 
+ Parser accepts input : input is in L(G) 

@@ -1,0 +1,4 @@
+Rule 4 used : SEEN int 
+ syntax error  near symbol ; 
+ Number of declaration statements : 0 
+ Parser does not accept input : input is not in L(G) 

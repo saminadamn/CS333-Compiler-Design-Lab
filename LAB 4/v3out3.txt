@@ -1,0 +1,4 @@
+Rule 2 used : SEEN int 
+Rule 5 used :seen First Identifier 
+ syntax error  near symbol  
+ Parser does not accept input : input is not in L(G) 

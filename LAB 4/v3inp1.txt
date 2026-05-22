@@ -1,0 +1,1 @@
+int sum, x1, _count ;

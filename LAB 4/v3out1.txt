@@ -1,0 +1,6 @@
+Rule 2 used : SEEN int 
+Rule 5 used :seen First Identifier 
+Rule 4 used: Seen another Identifier 
+Rule 4 used: Seen another Identifier 
+Rule 1 used : Successful Parse 
+ Parser accepts input : input is in L(G) 

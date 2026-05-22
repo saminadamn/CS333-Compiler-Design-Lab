@@ -1,0 +1,4 @@
+Rule 2 used : seen int
+Rule 6 used : seen Identifier a
+Rule 5 used : Seen First Identifier 
+ syntax error near symbol b 

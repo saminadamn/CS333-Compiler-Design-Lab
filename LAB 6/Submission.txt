@@ -1,0 +1,6 @@
+CSS 333: COMPILER DESIGN LABORATORY 
+LAB 6 ASSIGNMENT 
+
+
+P1. The Lex program identifies numbers and operators and sends them to the Yacc parser.
+The Yacc parser evaluates the expression step by step using semantic actions and prints the result of each operation.
